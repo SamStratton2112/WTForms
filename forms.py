@@ -11,3 +11,10 @@ class AddPetForm(FlaskForm):
     age = FloatField("Pet age", validators=[Optional(), NumberRange(min=0, max=30, message="Age must be between 1 and 30")])
     notes = StringField("Notes", validators=[Optional()])
     available = BooleanField("Pet availabile")
+
+class EditPetForm(FlaskForm):
+    """Form for editing an existing pet"""
+
+    photo_url = StringField("Pet Photo", validators=[Optional(), URL()])
+    notes = StringField("Notes", validators=[Optional()])
+    available = BooleanField("Pet available")

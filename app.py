@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect
 from models import db, connect_db, Pet
 
 from forms import AddPetForm
+from forms import EditPetForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret"
@@ -43,31 +44,15 @@ def get_pet_info(id):
     pet = Pet.query.get_or_404(id)
     return render_template('pet_details.html', pet=pet)
 
-# @app.route('/<int:id>/edit', methods=['GET','POST'])
-# def edit_pet_form(id):
-#     pet = Pet.query.get_or_404(id)
-#     form = AddPetForm(obj=pet)
-#     if form.validate_on_submit():
-#         pet.photo_url = form.photo_url.data
-#         pet.notes = form.notes.data
-#         pet.available = form.available.data
-#         # pet.name = pet.name
-#         # pet.species = pet.species
-#         db.session.add(pet)
-#         db.session.commit()
-#         return redirect('/<int:id>')
-#     else:
-#         print(form.errors)
-#         return render_template('edit_pet.html', pet=pet, form=form)
 @app.route('/<int:id>/edit', methods=['GET','POST'])
 def edit_pet_form(id):
+    """edit pet information form"""
     pet = Pet.query.get_or_404(id)
-    form = AddPetForm(obj=pet)
+    form = EditPetForm(obj=pet)
     if form.validate_on_submit():
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
         pet.available = form.available.data
-        db.session.add(pet)
         db.session.commit()
         return redirect(f'/{id}')
     else:

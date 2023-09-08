@@ -6,6 +6,8 @@
 
 <form action="/{{pet.id}}/edit" method="POST">
     {{form.hidden_tag()}}
+    <input type="hidden" name="name" value="{{pet.name}}">
+    <input type="hidden" name="species" value="{{pet.species}}">
     <p>{{form.photo_url.label}} {{form.photo_url}}</p>
     <p>{{form.notes.label}} {{form.notes}}</p>
     <p>{{form.available.label}} {{form.available}}</p> 

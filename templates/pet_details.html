@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block page_name %}Pet details{% endblock %}
+{% block content %}
+
+<h2>{{pet.name}}'s' information:</h2>
+<ul>
+    <li>Name: {{pet.name}}</li>
+    <li>Species: {{pet.species}}</li>
+    <li>age: {{pet.age}}</li>
+    {% if pet.photo_url %}
+    <li>Image: <img src="{{pet.photo_url}}"></li>
+    {% endif %}
+</ul>
+<button><a href="/{{pet.id}}/edit">Edit</a></button>
+<button><a href="/">Home</a></button>
+
+{% endblock %}
